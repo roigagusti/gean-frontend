@@ -8,13 +8,15 @@ import { useFamilyTree } from "@app/_contexts/FamilyTreeContext";
 interface PersonCardProps {
   id: string;
   name: string;
+  gender?: string;
   birthYear: number;
   deathYear?: number;
   x: number;
   y: number;
+  onSelect?: (id: string) => void;
 }
 
-export const PersonCard = ({ id, name, birthYear, deathYear, x, y }: PersonCardProps) => {
+export const PersonCard = ({ id, name, gender, birthYear, deathYear, x, y, onSelect }: PersonCardProps) => {
   const { movePerson } = useFamilyTree();
   const [dragging, setDragging] = useState(false);
   const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
@@ -44,6 +46,7 @@ export const PersonCard = ({ id, name, birthYear, deathYear, x, y }: PersonCardP
       onMouseMove={onDrag}
       onMouseUp={stopDrag}
       onMouseLeave={stopDrag}
+      onClick={() => onSelect && onSelect(id)}
     >
       <Heading as="h3" size="sm" mb={2}>
         {name}

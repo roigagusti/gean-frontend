@@ -8,6 +8,7 @@ import { Header } from "./_components/custom/Header/Header";
 import { PersonCard } from "./_components/custom/PersonCard/PersonCard";
 import { AddPerson } from "./_components/custom/AddPerson/AddPerson";
 import { AddRelationship } from "./_components/custom/AddRelationship/AddRelationship";
+import { PersonDrawer } from "./_components/custom/PersonDrawer/PersonDrawer";
 import { FamilyTreeProvider, useFamilyTree } from "@app/_contexts/FamilyTreeContext";
 
 import "./layout.css";
@@ -23,6 +24,7 @@ function Workspace() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
+  const [selectedPerson, setSelectedPerson] = useState<string | undefined>();
 
   const startDrag = (e: React.MouseEvent) => {
     setDragging(true);
@@ -76,23 +78,28 @@ function Workspace() {
           minH="100%"
         >
           {persons.map((p) => (
-            <PersonCard key={p.id} {...p} />
-          ))}
-        </Box>
-      </Canvas>
+            <PersonCard
+            key={p.id}
+            {...p}
+            onSelect={(id) => setSelectedPerson(id)}
+          />
+        ))}
+      </Box>
+    </Canvas>
 
-      <Flex position="absolute" top={4} right={4} bg="white" p={2} borderRadius="md" direction="column" gap={4} zIndex={10}>
-        <AddPerson />
-        <AddRelationship />
-      </Flex>
-    </Box>
-  );
+    <Flex position="absolute" top={4} right={4} bg="white" p={2} borderRadius="md" direction="column" gap={4} zIndex={10}>
+      <AddPerson />
+      <AddRelationship />
+    </Flex>
+    <PersonDrawer personId={selectedPerson} onClose={() => setSelectedPerson(undefined)} />
+  </Box>
+);
 }
 
 export default function FamilyTreeApp() {
-  return (
-    <FamilyTreeProvider>
-      <Workspace />
-    </FamilyTreeProvider>
-  );
+return (
+  <FamilyTreeProvider>
+    <Workspace />
+  </FamilyTreeProvider>
+);
 }

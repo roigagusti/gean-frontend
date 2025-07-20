@@ -6,6 +6,7 @@ export type Person = {
   name: string;
   birthYear: number;
   deathYear?: number;
+  gender?: string;
   x: number;
   y: number;
 };
@@ -26,6 +27,7 @@ type FamilyTreeContextType = FamilyTreeState & {
   addPerson: (p: Omit<Person, "id">) => void;
   movePerson: (id: string, x: number, y: number) => void;
   addRelationship: (r: Omit<Relationship, "id">) => void;
+  updatePerson: (id: string, data: Partial<Omit<Person, "id">>) => void;
 };
 
 const FamilyTreeContext = createContext<FamilyTreeContextType | undefined>(
@@ -48,6 +50,7 @@ export const FamilyTreeProvider = ({
       {
         id: uuidv4(),
         name: "Juan Pérez",
+        gender: "M",
         birthYear: 1950,
         deathYear: 2020,
         x: 600,
@@ -56,6 +59,7 @@ export const FamilyTreeProvider = ({
       {
         id: uuidv4(),
         name: "María López",
+        gender: "F",
         birthYear: 1955,
         x: 320,
         y: 200,
@@ -63,6 +67,7 @@ export const FamilyTreeProvider = ({
       {
         id: uuidv4(),
         name: "Ana Pérez",
+        gender: "F",
         birthYear: 1980,
         x: 100,
         y: 600,
@@ -94,9 +99,18 @@ export const FamilyTreeProvider = ({
     }));
   };
 
+  const updatePerson = (id: string, data: Partial<Omit<Person, "id">>) => {
+    setState((prev) => ({
+      ...prev,
+      persons: prev.persons.map((p) =>
+        p.id === id ? { ...p, ...data } : p
+      ),
+    }));
+  };
+
   return (
     <FamilyTreeContext.Provider
-      value={{ ...state, addPerson, movePerson, addRelationship }}
+      value={{ ...state, addPerson, movePerson, addRelationship, updatePerson }}
     >
       {children}
     </FamilyTreeContext.Provider>
