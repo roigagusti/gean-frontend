@@ -2,25 +2,58 @@
 
 import { Box, Heading } from "@chakra-ui/react";
 import styled from "styled-components";
+import { useState } from "react";
+import { useFamilyTree } from "@app/_contexts/FamilyTreeContext";
 
 interface PersonCardProps {
-    name: string;
-    birthYear: number;
-    deathYear?: number;
-    left?: number;
-    top?: number;
+  id: string;
+  name: string;
+  birthYear: number;
+  deathYear?: number;
+  x: number;
+  y: number;
 }
 
-export const PersonCard = ({ name, birthYear, deathYear, left, top }: PersonCardProps) => {
-    return (
-        <StyledPersonCard position="absolute" left={left} top={top}>
-            <Heading as="h3" size="sm" mb={2}>
-                {name}
-            </Heading>
-            <Box fontSize="sm">{birthYear} - {deathYear}</Box>
-        </StyledPersonCard>
-    );
-}
+export const PersonCard = ({ id, name, birthYear, deathYear, x, y }: PersonCardProps) => {
+  const { movePerson } = useFamilyTree();
+  const [dragging, setDragging] = useState(false);
+  const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
+
+  const startDrag = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDragging(true);
+    setLastPos({ x: e.clientX, y: e.clientY });
+  };
+
+  const onDrag = (e: React.MouseEvent) => {
+    if (!dragging) return;
+    const dx = e.clientX - lastPos.x;
+    const dy = e.clientY - lastPos.y;
+    movePerson(id, x + dx, y + dy);
+    setLastPos({ x: e.clientX, y: e.clientY });
+  };
+
+  const stopDrag = () => setDragging(false);
+
+  return (
+    <StyledPersonCard
+      position="absolute"
+      left={x}
+      top={y}
+      onMouseDown={startDrag}
+      onMouseMove={onDrag}
+      onMouseUp={stopDrag}
+      onMouseLeave={stopDrag}
+    >
+      <Heading as="h3" size="sm" mb={2}>
+        {name}
+      </Heading>
+      <Box fontSize="sm">
+        {birthYear} - {deathYear}
+      </Box>
+    </StyledPersonCard>
+  );
+};
 
 
 const StyledPersonCard = styled(Box)`
