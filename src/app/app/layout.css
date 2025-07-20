@@ -1,0 +1,154 @@
+/* ----- 0. Fonts ----- */
+@font-face {
+  font-family: "Inter";
+  src: url("../_fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../_fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+/* ----- 0. Basics ----- */
+:root {
+  --background: #f5f6f8;
+  --primary: #007fff;
+  --title: #000;
+  --text: #333;
+  --secondary-text: #999;
+
+  --primary-3: #f7fbff; /*rgba(0, 127, 255, 0.02)*/
+  --primary-5: #f2f9ff; /*rgba(0, 127, 255, 0.05)*/
+  --primary-10: #e6f2ff; /*rgba(0, 127, 255, 0.1)*/
+  --primary-15: #d9ecff; /*rgba(0, 127, 255, 0.15);*/
+  --primary-20: #cce5ff; /*rgba(0, 127, 255, 0.2);*/
+  --primary-50: #99ccff; /*rgba(0, 127, 255, 0.5);*/
+  --primary-90: #1a8cff; /*rgba(0, 127, 255, 0.90);*/
+  --primary-95: #0d86ff; /*rgba(0, 127, 255, 0.95);*/
+
+  --grey-5: #f7f7f8; /*rgba(97, 104, 113, 0.05);*/
+  --grey-10: #eff0f1; /*rgba(97, 104, 113, 0.1);*/
+  --grey-15: #e7e8ea; /*rgba(97, 104, 113, 0.15);*/
+  --grey-20: #dfe1e3; /*rgba(97, 104, 113, 0.2);*/
+  --grey-25: #d8d9dc; /*rgba(97, 104, 113, 0.25);*/
+  --grey-30: #d0d2d4; /*rgba(97, 104, 113, 0.3);*/
+  --grey-35: #c8cacd; /*rgba(97, 104, 113, 0.35);*/
+  --grey-40: #c0c3c6; /*rgba(97, 104, 113, 0.4);*/
+  --grey-45: #b8bbbf; /*rgba(97, 104, 113, 0.45);*/
+  --grey-50: #b0b4b8; /*rgba(97, 104, 113, 0.5);*/
+
+  --button-hover: rgba(0, 0, 0, 0.02);
+  --button-text: #616871;
+  --button-sidebar-text: #999;
+  --button-border: #e5e7eb;
+  --button-low-primary: rgba(0, 127, 255, 0.05);
+  --button-low-primary-hover: rgba(0, 127, 255, 0.1);
+
+  --navbar-background: #fafafa;
+  --navbar-border: #eu2e8f0;
+  --navbar-selected: #ededed;
+
+  --element-border: #dcdcdc;
+
+  --table-border: #e4e4e7;
+  --table-header-background: #f9fafb;
+  --table-expand-hover: rgba(97, 104, 113, 0.1);
+
+  --table-row-hover: rgba(97, 104, 113, 0.1);
+  --table-row-chapter: rgba(97, 104, 113, 0.05);
+  --table-row-selected: rgba(0, 127, 255, 0.1);
+  --table-row-selected-hover: rgba(0, 127, 255, 0.15);
+
+  --file-pdf: #f40f02;
+  --file-excel: #10793f;
+  --file-word: #1b5ebe;
+
+  --danger: #f85149;
+  --danger-hover: rgba(248, 81, 73, 0.8);
+  --danger-background: rgba(248, 81, 73, 0.1);
+  --danger-5: #FEEEED;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+html,
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/***** PREFERENCES *****/
+.preferences-container {
+  margin-top: 20px;
+  font-size: 12px;
+}
+.preferences-tab-item:is([aria-selected="true"]) {
+  color: var(--primary);
+}
+.preferences-tab-item:is([aria-selected="true"])::before {
+  border-bottom: 2px solid var(--primary);
+}
+.preferences-label {
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.preferences-input {
+  margin-bottom: 5px;
+}
+.preferences-text {
+  font-size: 11px;
+  color: var(--secondary-text);
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.preferences-buttons {
+  margin-top: 10px;
+}
+.preferences-buttons button {
+  margin-right: 5px;
+}
+.preferences-current-plan {
+  margin-top: 30px;
+  border: 1px solid var(--table-border);
+  border-radius: 8px;
+}
+.preferences-current-header {
+  padding: 15px 25px;
+  border-bottom: 1px solid var(--table-border);
+  background-color: var(--table-header-background);
+}
+.preferences-current-title {
+  font-weight: 700;
+}
+.preferences-current-subtitle {
+  color: var(--secondary-text);
+}
+.preferences-current-included {
+  width: 100%;
+  padding: 15px 25px;
+  padding-bottom: 30px;
+}
+.preferences-not-included-title {
+  font-weight: 700;
+  color: var(--secondary-text);
+  margin-bottom: 10px;
+}
+
+/***** TEXT *****/
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

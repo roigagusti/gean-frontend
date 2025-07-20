@@ -1,0 +1,11 @@
+services:
+  buildis-app:
+    image: buildis-app
+    build:
+      context: ../../..
+      dockerfile: Dockerfile
+    container_name: buildis-app
+    env_file:
+      - path: ./../../../.env
+    ports:
+      - "8080:3000"
