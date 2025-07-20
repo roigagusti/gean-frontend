@@ -12,7 +12,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="/logos/favicon.ico" />
-        <title>Buildis</title>
+        <title>Gean</title>
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
